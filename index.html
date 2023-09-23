@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <style>
+    /* Add basic styling for the chat interface */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      /* Set a fixed height for the chat container */
+      overflow-y: auto;
+      /* Add vertical scrolling for overflow */
+    }
+
+    /* User and bot messages with different colors */
+    .message {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .user-message {
+      background-color: #007BFF;
+      color: white;
+      text-align: right;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      margin-left: auto;
+    }
+
+    .bot-message {
+      background-color: #ddd;
+      text-align: left;
+      color: #333;
+      /* Change the color of bot responses */
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      margin-right: auto;
+    }
+
+    /* User input field and button */
+    .user-input {
+      display: flex;
+      align-items: center;
+    }
+
+    .user-input input[type="text"] {
+      flex-grow: 1;
+      padding: 5px;
+      margin-right: 10px;
+      /* Add some spacing between input and button */
+    }
+
+    .user-input button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    /* Images for the bot and human */
+    .bot-image {
+      max-width: 100px;
+      max-height: 100px;
+      align-self: flex-end;
+      margin-left: 10px;
+    }
+
+    .human-animation {
+      max-width: 100px;
+      max-height: 100px;
+      align-self: flex-start;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="chat-container" id="chatContainer">
+    <!-- Chat messages container -->
+    <div class="message user-message">
+      <p>Hello! How can I assist you today?</p>
+      <img src="human_image.webp" alt="Human Animation" class="human-animation">
+    </div>
+  </div>
+
+  <!-- User input field -->
+  <div class="user-input">
+    <input type="text" id="userMessage" placeholder="Type your message...">
+    <button id="sendMessage">Send</button>
+  </div>
+
+  <!-- Bot image -->
+  <img src="bot_image.jpg" alt="Bot" class="bot-image">
+
+  <!-- JavaScript for chat functionality -->
+  <script>
+    // Function to send and receive messages
+    function sendMessage() {
+      const userMessage = document.getElementById("userMessage").value;
+      if (userMessage.trim() === "") return;
+
+      const chatContainer = document.getElementById("chatContainer");
+
+      // Create and append user message on the right side
+      const userDiv = document.createElement("div");
+      userDiv.className = "message user-message";
+      userDiv.innerHTML = `<p>${userMessage}</p><img src="human_image.webp" alt="Human Animation" class="human-animation">`;
+      chatContainer.appendChild(userDiv);
+
+      // Simulate bot response (you can replace this with actual chatbot logic)
+      setTimeout(function () {
+        const botDiv = document.createElement("div");
+        botDiv.className = "message bot-message";
+        botDiv.innerHTML = `I'm a chatbot. You just said: ${userMessage}<img src="bot_image.jpg" alt="Bot" class="bot-image">`;
+        chatContainer.appendChild(botDiv);
+
+        // Scroll to the bottom to show the latest message
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }, 1000);
+
+      // Clear the input field
+      document.getElementById("userMessage").value = "";
+    }
+
+    // Add event listener to the send button
+    document.getElementById("sendMessage").addEventListener("click", sendMessage);
+
+    // Allow pressing Enter key to send messages
+    document.getElementById("userMessage").addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+
+</html>
