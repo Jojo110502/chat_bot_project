@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors())
 
 // will create a .sth file to keep it more safe
-const API_KEY = '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'
+const API_KEY = ''
 
 // async function
 app.post('',async (req, res)=>{
