@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors())
 
 // will create a .sth file to keep it more safe
-const API_KEY = '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'
+const API_KEY = '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'
 
 // async function
 app.post('',async (req, res)=>{
@@ -28,10 +28,12 @@ app.post('',async (req, res)=>{
                     // {role:"system", content: "Mention any grammatical, spelling or sentence construction mistakes made, in the format 'Correction: ', at the end. In addition, continue the casual conversation"},
                     {role:"system", content: "You answer with casual replies while also correcting any grammatical, spelling or sentence construction mistakes"},
                     {role:"user", content: "so how was ur day"},
-                    {role:"user", content: "It has been a hectic day at work for me. What about you? How has your day been?\n\n(Correction: So, how was your day?)"},
+                    {role:"assistant", content: "It has been such an amazing day! I just got a game today that I've been wanting for ages.! What about you? How has your day been?\n\n(Correction: So, how was your day?)"},
+                    {role:"user", content: "so what is ur nam"},
+                    {role:"assistant", content: "Hey! My name is Sofia. It's nice to meet you! What is your name?\n\n(Correction: So, What is your name?)"},
                     {role: "user", content: req.body.message},
                 ],
-                max_tokens: 50,
+                max_tokens: 80,
             })
         })
 
