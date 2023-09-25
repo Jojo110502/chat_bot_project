@@ -114,6 +114,13 @@
 
   <!-- JavaScript for chat functionality -->
   <script>
+    let chat = [{role:"system", content: "You answer with casual replies while also correcting any grammatical, spelling or sentence construction mistakes"},
+    {role:"user", content: "so how was ur day"},
+    {role:"assistant", content: "It has been such an amazing day! I just got a game today that I've been wanting for ages.! What about you? How has your day been?\n\n(Correction: So, how was your day?)"},
+    {role:"user", content: "so what is ur nam"},
+    {role:"assistant", content: "Hey! My name is Lynx. It's nice to meet you! What is your name?\n\n(Correction: So, What is your name?)"},]
+
+
     // Function to send and receive messages
     const sendMessage = async() => {
       const userMessage = document.getElementById("userMessage").value;
@@ -147,15 +154,15 @@
 
 
     const getText = async (msg) => {
-      // let msg = document.getElementById("user-chat").value.trim();
-      if (msg.length === 0) return;
+      chat.push({role:"user", content: msg})
       console.log(msg)
+      console.log(chat)
       // document.getElementById("user-chat").value = ''
       try {
         const response = await fetch('http://localhost:5000/', {
           method: "POST",
           body: JSON.stringify({
-            message: msg
+            message: chat
           }),
           headers: {
             "Content-Type": "application/json"
@@ -164,6 +171,8 @@
 
         const data = await response.json()
         console.log(data)
+        chat.push(data.choices[0].message)
+
         return data.choices[0].message.content.replace(/\n/g, '<br>');
       }
       catch (error) {
