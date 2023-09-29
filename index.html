@@ -15,55 +15,56 @@
     }
 
     /* Sidebar styles */
-        .sidebar {
-            width: 200px;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
+    .sidebar {
+      width: 200px;
+      background-color: #333;
+      color: white;
+      padding: 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
 
-        .sidebar h2 {
-            margin-top: 0;
-        }
+    .sidebar h2 {
+      margin-top: 0;
+    }
 
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-       .sidebar li {
-            margin-bottom: 10px;
-        }    
+    .sidebar li {
+      margin-bottom: 10px;
+    }
 
     /* Dropdown styles */
-        .dropdown {
-            position: relative;
-            cursor: pointer;
-        }
-    
-     .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #333;
-            min-width: 150px;
-        }
+    .dropdown {
+      position: relative;
+      cursor: pointer;
+    }
 
-        .dropdown-content a {
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            display: block;
-        }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #333;
+      min-width: 150px;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .dropdown-content a {
+      color: white;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
     .chat-container {
       max-width: 100%;
       margin: 0 auto;
@@ -124,7 +125,7 @@
     }
 
     .user-input button {
-      background-color: #65c4be;
+      background-color: #007BFF;
       color: white;
       border: none;
       padding: 10px 10px;
@@ -146,47 +147,44 @@
       align-self: flex-start;
       margin-right: 10px;
 
-      }
-    
+    }
+    }
   </style>
 </head>
+
 <body>
-<!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Options</h2>
-        <ul>
-            <li class="dropdown">
-                Roleplay
-                <div class="dropdown-content">
-                    <a href="#">Option 1</a>
-                    <a href="#">Option 2</a>
-                    <a href="#">Option 3</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                Proficiency Level
-                <div class="dropdown-content">
-                    <a href="#">Beginner</a>
-                    <a href="#">Intermediate</a>
-                    <a href="#">Advanced</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                Languages
-                <div class="dropdown-content">
-                    <a href="#">English</a>
-                   <a href="#">Spanish</a>
-                    <a href="#">French</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-  
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Options</h2>
+    <ul>
+      <li class="dropdown">
+        Roleplay
+      </li>
+      <li class="dropdown">
+        Proficiency Level
+      </li>
+      <li class="dropdown">
+        Languages
+        <div class="dropdown-content">
+          <a href="#">English</a>
+          <a href="#">Spanish</a>
+          <a href="#">French</a>
+          <a href="#">Hindi</a>
+          <a href="#">German</a>
+          <a href="#">Chinese</a>
+          <a href="#">Japnanese</a>
+          <a href="#">Italian</a>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+
   <div class="chat-container" id="chatContainer">
     <!-- Chat messages container -->
     <div class="message bot-message">
       <p>Hello! How can I assist you today?</p>
-      <img src="assets/img/bot_image.jpg" alt="Bot Image" class="bot-image">
+      <img src="bot_image.jpg" alt="Bot Image" class="bot-image">
     </div>
   </div>
 
@@ -199,15 +197,8 @@
 
   <!-- JavaScript for chat functionality -->
   <script>
-    let chat = [{role:"system", content: "You answer with casual replies while also correcting any grammatical, spelling or sentence construction mistakes"},
-    {role:"user", content: "so how was ur day"},
-    {role:"assistant", content: "It has been such an amazing day! I just got a game today that I've been wanting for ages.! What about you? How has your day been?\n\n(Correction: So, how was your day?)"},
-    {role:"user", content: "so what is ur nam"},
-    {role:"assistant", content: "Hey! My name is Lynx. It's nice to meet you! What is your name?\n\n(Correction: So, What is your name?)"},]
-
-
     // Function to send and receive messages
-    const sendMessage = async() => {
+    function sendMessage() {
       const userMessage = document.getElementById("userMessage").value;
       if (userMessage.trim() === "") return;
 
@@ -216,20 +207,17 @@
       // Create and append user message on the right side
       const userDiv = document.createElement("div");
       userDiv.className = "message user-message";
-      userDiv.innerHTML = `<p>${userMessage}</p><img src="assets/img/human_image.png" alt="Human Animation" class="human-animation">`;
+      userDiv.innerHTML = `<p>${userMessage}</p><img src="human_image.png" alt="Human Animation" class="human-animation">`;
       chatContainer.appendChild(userDiv);
-
-      botmsg = await getText(userMessage);
-      console.log("msg returned: "+botmsg)
 
       // Simulate bot response (you can replace this with actual chatbot logic)
       setTimeout(function () {
         const botDiv = document.createElement("div");
         botDiv.className = "message bot-message";
-        botDiv.innerHTML = `${botmsg}<img src="assets/img/bot_image.jpg" alt="Bot" class="bot-image">`;
+        botDiv.innerHTML = `I'm a chatbot. You just said: ${userMessage}<img src="bot_image.jpg" alt="Bot" class="bot-image">`;
         chatContainer.appendChild(botDiv);
 
-         
+
         // Scroll to the bottom to show the latest message
         chatContainer.scrollTop = chatContainer.scrollHeight;
       }, 1000);
@@ -237,35 +225,6 @@
       // Clear the input field
       document.getElementById("userMessage").value = "";
     }
-
-
-    const getText = async (msg) => {
-      chat.push({role:"user", content: msg})
-      console.log(msg)
-      console.log(chat)
-      // document.getElementById("user-chat").value = ''
-      try {
-        const response = await fetch('http://localhost:5000/', {
-          method: "POST",
-          body: JSON.stringify({
-            message: chat
-          }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-
-        const data = await response.json()
-        console.log(data)
-        chat.push(data.choices[0].message)
-
-        return data.choices[0].message.content.replace(/\n/g, '<br>');
-      }
-      catch (error) {
-        console.log(error)
-      }
-    }
-
 
     // Add event listener to the send button
     document.getElementById("sendMessage").addEventListener("click", sendMessage);
